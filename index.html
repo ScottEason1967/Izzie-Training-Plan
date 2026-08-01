@@ -148,6 +148,24 @@
 <!-- ============ THIS WEEK ============ -->
 <section class="view active" id="week">
   <p class="lead">Your week, day by day. <b>Tap any meal to see the recipe options.</b> Weekday gym is before school, so those days run on a small carb snack, then a shake and a reheatable breakfast at school. This shows your <b>standard week</b> by default; to change it, use the <b>Planner</b> tab and it updates here.</p>
+
+  <div class="card" id="readyCard">
+    <h3>How are you today?</h3>
+    <p class="muted" style="margin:2px 0 8px">Tap how you're feeling, add your Oura readiness score if you've got it, and today's plan nudges to match. Saves on this device.</p>
+    <div class="segs" id="feelSegs">
+      <button class="seg" data-feel="fresh" type="button">Fresh</button>
+      <button class="seg" data-feel="good" type="button">Good</button>
+      <button class="seg" data-feel="tired" type="button">Tired</button>
+      <button class="seg" data-feel="wrecked" type="button">Wrecked</button>
+    </div>
+    <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <label class="muted" style="font-size:13px">Oura readiness
+        <input id="ouraIn" type="number" min="0" max="100" placeholder="score" style="width:82px;margin-left:8px;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 9px;font-size:14px">
+      </label>
+      <button class="btn ghost" id="readyClr" type="button">Clear today</button>
+    </div>
+  </div>
+
   <div id="weekOut"></div>
 </section>
 
@@ -428,6 +446,15 @@ render('t-other',OTHER);
 
 /* ---------- planner ---------- */
 var MODE='standard';
+var READY={feel:null,oura:null};
+var TODAY=(function(){var d=new Date().getDay();return d===0?6:d-1;})();
+function worstR(a,b){var o={green:0,amber:1,red:2};return o[a]>=o[b]?a:b;}
+function readyState(){
+  var s=null;
+  if(READY.oura!=null && READY.oura!==''){ var n=+READY.oura; if(!isNaN(n)) s = n>=85?'green':(n>=70?'amber':'red'); }
+  if(READY.feel){ var fs=(READY.feel==='fresh'||READY.feel==='good')?'green':(READY.feel==='tired'?'amber':'red'); s=s?worstR(s,fs):fs; }
+  return s;
+}
 var TREATSALL=TREATS.concat(OTHER);
 var PDAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 var SESS=[
@@ -577,17 +604,25 @@ function buildWeek(){
   if(warns.length){ html+='<ul class="clean" style="margin:6px 0 0">'+li(warns)+'</ul>'; } else { html+=' Nicely balanced for building.'; }
   html+='</div>';
 
+  var todayReady=readyState();
   for(var k=0;k<7;k++){
     var m=metas[k], ty=typeOf(m);
     var isWeekend=(k>=5);
+    var isToday=(k===TODAY);
+    var rd=isToday?todayReady:null;
     var names=m.real.length? m.real.map(function(s){return s.label}).join(' + ') : 'Rest';
-    html+='<div class="card"><div class="dhead"><span class="dday">'+PDAYS[k]+'</span><span class="dtag">'+names+'</span></div>';
+    html+='<div class="card"'+(isToday?' style="border-color:var(--accent)"':'')+'><div class="dhead"><span class="dday">'+PDAYS[k]+(isToday?' &middot; today':'')+'</span><span class="dtag">'+names+'</span></div>';
+    if(rd){
+      var rmsg = rd==='green'?'Good recovery, follow the plan.':rd==='amber'?'A bit under-recovered. Keep the plan but don\'t chase PRs today, and get extra food and sleep.':'Not recovered. Make today easy: ease the session (lighter, fewer sets) or swap it for rest, Pilates or a walk, and prioritise food and sleep.';
+      html+='<div class="callout '+(rd==='green'?'c-good':'c-warn')+'" style="margin:4px 0 10px"><b>Today &middot; '+rd.toUpperCase()+'.</b> '+rmsg+'</div>';
+    }
     html+='<span class="out-tag '+ty.c+'">'+ty.t+'</span> <span class="pill p-carb" style="vertical-align:middle">'+carbOf(m)+'</span> <span class="pill p-prot" style="vertical-align:middle">Protein ~110&ndash;120g</span>';
     if(m.gym) html+=' <span class="pill p-school" style="vertical-align:middle">Before school</span>';
     if(!m.empty){ html+='<p class="muted" style="margin:8px 0 4px"><b>Session.</b></p><ul class="clean muted" style="margin:0">'+li(m.real.map(function(s){return s.focus}))+'</ul>'; }
     html+='<p class="muted" style="margin:8px 0 6px"><b>Fuel.</b> '+fuelNote(m)+'</p>';
     html+= feedHtml(feedsFor(m));
     html+='<p class="muted" style="margin:8px 0 0"><b>Treat.</b> '+treatNote(m)+'</p>';
+    if(rd==='red' && m.gym) html+='<p class="muted" style="margin:8px 0 0"><span class="pill p-gym">Heads up</span> Oura\'s low and it\'s a gym day. Ease it or swap it, muscle is built by recovery too. Don\'t force a hard session on no recovery.</p>';
     if(drink && isWeekend){ html+='<p class="muted" style="margin:8px 0 0"><span class="pill p-rest">Night out</span> Eat a proper protein meal before, water between drinks, and get protein and food in tomorrow. Don\'t let it cost you a session.</p>'; }
     html+='</div>';
   }
@@ -595,6 +630,25 @@ function buildWeek(){
   out.innerHTML=html;
   out.querySelectorAll('.feed').forEach(function(fe){ fe.querySelector('.fhead').addEventListener('click',function(){ fe.classList.toggle('open'); }); });
 }
+
+/* ---- daily readiness check (manual, Oura, saves per-device) ---- */
+function readyKey(){ var d=new Date(); return 'izzie_ready_'+d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+(function(){
+  try{ var s=localStorage.getItem(readyKey()); if(s) READY=JSON.parse(s); }catch(e){}
+  var fs=document.getElementById('feelSegs'); if(!fs) return;
+  function save(){ try{ localStorage.setItem(readyKey(), JSON.stringify(READY)); }catch(e){} }
+  function paint(){
+    fs.querySelectorAll('.seg').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-feel')===READY.feel); });
+    var oi=document.getElementById('ouraIn'); if(oi) oi.value=(READY.oura!=null?READY.oura:'');
+  }
+  fs.querySelectorAll('.seg').forEach(function(b){
+    b.addEventListener('click',function(){ READY.feel=b.getAttribute('data-feel'); save(); paint(); buildWeek(); });
+  });
+  var oi=document.getElementById('ouraIn');
+  if(oi) oi.addEventListener('input',function(){ READY.oura = oi.value===''?null:+oi.value; save(); buildWeek(); });
+  document.getElementById('readyClr').addEventListener('click',function(){ READY={feel:null,oura:null}; save(); paint(); buildWeek(); });
+  paint(); buildWeek();
+})();
 </script>
 </body>
 </html>
