@@ -458,12 +458,12 @@ function readyState(){
 var TREATSALL=TREATS.concat(OTHER);
 var PDAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 var SESS=[
-  {id:'legham',label:'Legs: hamstrings',load:2,gym:true,focus:'Hamstring-focused legs. RDLs, curls, split squats.'},
-  {id:'legglute',label:'Legs: glutes',load:2,gym:true,focus:'Glute-focused legs. Hip thrusts, kickbacks, lunges.'},
-  {id:'back',label:'Back &amp; biceps',load:2,gym:true,focus:'Pulldowns, rows, curls.'},
-  {id:'push',label:'Shoulders/chest/tri',load:2,gym:true,focus:'Presses, raises, tricep work.'},
-  {id:'pilates',label:'Pilates',load:1,pil:true,focus:'Pilates class. Core, mobility, active recovery. Evening.'},
-  {id:'runeasy',label:'Run: easy',load:1,run:true,focus:'Easy run, building from 3k. Conversational.'},
+  {id:'legham',label:'Legs: hamstrings',load:2,gym:true,focus:'Hamstring-focused legs.',ex:['Romanian deadlift 4&times;8&ndash;10','Seated leg curl 4&times;10&ndash;12','Lying leg curl 3&times;10&ndash;12','Bulgarian split squat 3&times;8&ndash;10','Back extension 3&times;12&ndash;15','Calf raise 3&times;15']},
+  {id:'legglute',label:'Legs: glutes',load:2,gym:true,focus:'Glute-focused legs.',ex:['Barbell hip thrust 4&times;8&ndash;12','Cable glute kickback 3&times;12&ndash;15','Sumo leg press 3&times;10&ndash;12','Bulgarian split squat 3&times;8&ndash;10','Hip abduction 3&times;15','Walking lunges 3&times;12']},
+  {id:'back',label:'Back &amp; biceps',load:2,gym:true,focus:'Back and biceps.',ex:['Lat pulldown 4&times;8&ndash;12','Seated cable row 4&times;8&ndash;12','Assisted pull-ups 3&times;8&ndash;10','Single-arm DB row 3&times;10&ndash;12','Face pulls 3&times;12&ndash;15','DB curl + hammer curl 3&times;10&ndash;12']},
+  {id:'push',label:'Shoulders/chest/tri',load:2,gym:true,focus:'Shoulders, chest and triceps.',ex:['DB shoulder press 4&times;8&ndash;12','Incline DB press 4&times;8&ndash;12','Lateral raise 3&times;12&ndash;15','Cable fly or press 3&times;10&ndash;12','Rear delt fly 3&times;12&ndash;15','Pushdown + overhead ext 3&times;10&ndash;12']},
+  {id:'pilates',label:'Pilates',load:1,pil:true,focus:'Pilates class, core, mobility, active recovery. Evening.'},
+  {id:'runeasy',label:'Run: easy',load:1,run:true,focus:'Easy run, building from 3k. Conversational pace.'},
   {id:'runfast',label:'Run: faster',load:2,run:true,focus:'A quicker run once 5k feels easy. Occasional.'}
 ];
 var PDEFAULT={Mon:['legham'],Tue:['back'],Wed:['push'],Thu:['pilates'],Fri:['runeasy'],Sat:['legglute'],Sun:[]};
@@ -619,7 +619,14 @@ function buildWeek(){
     }
     html+='<span class="out-tag '+ty.c+'">'+ty.t+'</span> <span class="pill p-carb" style="vertical-align:middle">'+carbOf(m)+'</span> <span class="pill p-prot" style="vertical-align:middle">Protein ~110&ndash;120g</span>';
     if(m.gym) html+=' <span class="pill p-school" style="vertical-align:middle">Before school</span>';
-    if(!m.empty){ html+='<p class="muted" style="margin:8px 0 4px"><b>Session.</b></p><ul class="clean muted" style="margin:0">'+li(m.real.map(function(s){return s.focus}))+'</ul>'; }
+    if(!m.empty){
+      html+='<p class="muted" style="margin:8px 0 4px"><b>Session.</b></p>';
+      m.real.forEach(function(s){
+        html+='<div style="margin:0 0 8px"><b style="color:var(--ink)">'+s.label+'</b> <span class="muted">&mdash; '+s.focus+'</span>';
+        if(s.ex && s.ex.length){ html+='<ul class="clean muted" style="margin:3px 0 0">'+li(s.ex)+'</ul>'; }
+        html+='</div>';
+      });
+    }
     html+='<p class="muted" style="margin:8px 0 6px"><b>Fuel.</b> '+fuelNote(m)+'</p>';
     html+= feedHtml(feedsFor(m));
     html+='<p class="muted" style="margin:8px 0 0"><b>Treat.</b> '+treatNote(m)+'</p>';
