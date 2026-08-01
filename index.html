@@ -501,6 +501,7 @@ PDAYS.forEach(function(d){WEEK[d]=(PDEFAULT[d]||[]).slice()});
   document.getElementById('buildBtn').addEventListener('click',function(){ MODE='custom'; buildWeek(); gotoWeek(); });
   document.getElementById('clearBtn').addEventListener('click',function(){
     PDAYS.forEach(function(d){WEEK[d]=(PDEFAULT[d]||[]).slice()});
+    var dt=document.getElementById('drinkTog'); if(dt) dt.checked=false;
     syncChips();
   });
   document.querySelectorAll('#modeSegs .seg').forEach(function(sg){
@@ -541,7 +542,7 @@ function buildWeek(){
   if(runMax>=5) warns.push(runMax+' hard days in a row. Slot an easy day, Pilates or a rest in to recover.');
 
   function li(a){return a.map(function(x){return '<li>'+x+'</li>'}).join('')}
-  function typeOf(m){ if(m.empty) return {t:'Rest & build',c:'p-rest'}; if(m.gym) return {t:'Gym day',c:'p-gym'}; if(m.pil) return {t:'Pilates',c:'p-pil'}; return {t:'Run day',c:'p-run'}; }
+  function typeOf(m){ if(m.empty) return {t:'Rest & build',c:'p-rest'}; var parts=[]; if(m.gym)parts.push('Gym'); if(m.pil)parts.push('Pilates'); if(m.run)parts.push('Run'); return {t:parts.join(' + ')+' day', c:(m.gym?'p-gym':(m.pil?'p-pil':'p-run'))}; }
   function carbOf(m){ if(m.empty) return 'Protein high, carbs steady'; if(m.gym) return 'Fuel to build'; if(m.pil) return 'Eat normally'; return 'Medium carb'; }
   function fuelNote(m){
     if(m.empty) return 'A rest day is still an eating day. Keep protein high across your feeds, don\'t drop the food, this is when you grow. Carbs can come down slightly.';
