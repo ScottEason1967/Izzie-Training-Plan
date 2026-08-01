@@ -101,6 +101,18 @@
   .btn:hover{filter:brightness(1.08)}
   .btn.ghost{background:transparent;color:var(--mut);border:1px solid var(--line)}
   .btn.ghost:hover{color:var(--ink);border-color:var(--mut)}
+  .segs{display:inline-flex;gap:4px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:4px}
+  .seg{border:none;background:transparent;color:var(--mut);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700}
+  .seg.on{background:var(--accent);color:#fff}
+  .feed{border:1px solid var(--line);border-radius:10px;margin:6px 0;overflow:hidden}
+  .feed .fhead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;background:var(--panel2)}
+  .feed .fhead:hover{background:var(--panel)}
+  .feed .ftime{color:var(--accent);font-size:12px;font-weight:700;margin-left:6px}
+  .feed .caret{color:var(--mut);transition:transform .2s;flex:0 0 auto}
+  .feed.open .caret{transform:rotate(90deg);color:var(--accent)}
+  .feed .fbody{display:none;padding:9px 12px;font-size:13.5px;border-top:1px solid var(--line)}
+  .feed.open .fbody{display:block}
+  .feed .fbody b{color:var(--ink)}
   .chk{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 12px;cursor:pointer}
   .chk input{accent-color:var(--accent);width:16px;height:16px}
   .out-tag{display:inline-block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:5px 11px;border-radius:8px;margin-bottom:4px}
@@ -122,8 +134,8 @@
 </header>
 
 <nav class="tabs" id="tabs">
-  <button class="tab active" data-v="week">This Week</button>
   <button class="tab" data-v="planner">Planner</button>
+  <button class="tab active" data-v="week">This Week</button>
   <button class="tab" data-v="training">Training</button>
   <button class="tab" data-v="fuel">Fuel</button>
   <button class="tab" data-v="treats">Treats</button>
@@ -135,55 +147,29 @@
 
 <!-- ============ THIS WEEK ============ -->
 <section class="view active" id="week">
-  <p class="lead">Your week: four gym sessions, Pilates on Thursday, an easy run and a rest day. Weekday gym is <b>before school</b>, so those days run on a small carb snack, then a shake and a reheatable breakfast once you're at school. Recipes are all on the Fuel and Treats tabs.</p>
-
-  <div class="callout c-info"><b>The one rule.</b> Muscle is built by enough food and progressive training. On a slim frame, under-eating is what holds you back, so lean on frequent, protein-rich feeds through the day rather than big plates. The rest day matters, it's when you actually grow.</div>
-
-  <div class="card day gym"><div class="dhead"><span class="dday">Monday</span><span class="dtag">Gym &middot; Legs (hamstrings) &middot; before school</span></div>
-    <span class="pill p-gym">Strength</span><span class="pill p-carb">Fuel to build</span><span class="pill p-school">School breakfast</span>
-    <p class="muted" style="margin:6px 0 0"><b>Before gym:</b> small carb snack (a Pink Lady apple, or rice cakes + honey). <b>After gym:</b> protein shake, then your reheatable breakfast at school (egg muffins or overnight oats). Then picky lunch, afternoon snack, dinner, a protein treat.</p></div>
-
-  <div class="card day gym"><div class="dhead"><span class="dday">Tuesday</span><span class="dtag">Gym &middot; Back &amp; biceps &middot; before school</span></div>
-    <span class="pill p-gym">Strength</span><span class="pill p-carb">Fuel to build</span><span class="pill p-school">School breakfast</span>
-    <p class="muted" style="margin:6px 0 0">Same shape as Monday: carb snack before, shake + reheatable breakfast at school after. Keep protein topped up across the day.</p></div>
-
-  <div class="card day gym"><div class="dhead"><span class="dday">Wednesday</span><span class="dtag">Gym &middot; Shoulders, chest &amp; triceps &middot; before school</span></div>
-    <span class="pill p-gym">Strength</span><span class="pill p-carb">Fuel to build</span><span class="pill p-school">School breakfast</span>
-    <p class="muted" style="margin:6px 0 0">Push day. Progress a lift from last week. Fuel exactly as Mon/Tue, before school.</p></div>
-
-  <div class="card day pil"><div class="dhead"><span class="dday">Thursday</span><span class="dtag">Pilates (evening)</span></div>
-    <span class="pill p-pil">Pilates</span><span class="pill p-prot">Protein high</span>
-    <p class="muted" style="margin:6px 0 0">Nice and light, great for your core and recovery. No special fuelling, just eat normally through the day with protein at every feed. A relaxed dinner beforehand.</p></div>
-
-  <div class="card day run"><div class="dhead"><span class="dday">Friday</span><span class="dtag">Run &middot; easy</span></div>
-    <span class="pill p-run">Easy run</span><span class="pill p-carb">Medium carb</span>
-    <p class="muted" style="margin:6px 0 0">Easy run, building from your 3k (see the Training tab for how to progress). A bit of carb before, a protein feed after. If there's a night out, eat well first.</p></div>
-
-  <div class="card day gym"><div class="dhead"><span class="dday">Saturday</span><span class="dtag">Gym &middot; Legs (glutes)</span></div>
-    <span class="pill p-gym">Strength</span><span class="pill p-carb">Fuel to build</span>
-    <p class="muted" style="margin:6px 0 0">Your weekend session, glute focus, so no early start, go when it suits. Fuel before and refuel properly after, then enjoy the weekend.</p></div>
-
-  <div class="card day rest"><div class="dhead"><span class="dday">Sunday</span><span class="dtag">Rest</span></div>
-    <span class="pill p-rest">Rest &amp; build</span><span class="pill p-prot">Protein high</span>
-    <p class="muted" style="margin:6px 0 0">Full rest, and this is when the muscle actually grows. Keep eating properly. Good day to batch-cook: egg muffins, a pasta pot, boiled eggs, so the week's easy. A second easy run is fine here if you fancy it, but a proper rest day is better.</p></div>
-
-  <div class="callout c-info"><b>Following a different week?</b> Set it in the Planner tab and it'll build the fuel and checks around whatever you're actually doing.</div>
+  <p class="lead">Your week, day by day. <b>Tap any meal to see the recipe options.</b> Weekday gym is before school, so those days run on a small carb snack, then a shake and a reheatable breakfast at school. This shows your <b>standard week</b> by default; to change it, use the <b>Planner</b> tab and it updates here.</p>
+  <div id="weekOut"></div>
 </section>
 
 <!-- ============ PLANNER ============ -->
 <section class="view" id="planner">
-  <p class="lead">Your week moves, so build the real one. Tap what you're actually doing each day. It sets the fuel focus, keeps protein high, and checks you've got your four gym sessions and a rest day. Nothing saves, so it's a quick weekly set-up.</p>
+  <p class="lead">This is the control for your week. It stays on your <b>standard week</b> until you change it. Switch to <b>Customise</b> to set what you're actually doing, hit build, and the <b>This Week</b> tab updates to match.</p>
   <div class="card">
-    <h3>Set your week</h3>
-    <p class="muted" style="margin:4px 0 10px">Tap to add or remove. Leave a day empty for rest. It opens on your usual shape &mdash; change whatever's different.</p>
-    <div id="weekGrid"></div>
-    <div style="margin-top:12px"><label class="chk"><input type="checkbox" id="drinkTog"> Night out this weekend</label></div>
-    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn" id="buildBtn">Build the week &rarr;</button>
-      <button class="btn ghost" id="clearBtn">Reset to standard</button>
+    <div class="segs" id="modeSegs">
+      <button class="seg on" data-mode="standard" type="button">Standard week</button>
+      <button class="seg" data-mode="custom" type="button">Customise</button>
+    </div>
+    <p class="muted" id="stdMsg" style="margin:12px 0 0">Following your standard week. The This Week tab is set to it. Tap <b>Customise</b> to change what you're doing this week.</p>
+    <div id="customPanel" style="display:none;margin-top:12px">
+      <p class="muted" style="margin:0 0 10px">Tap to add or remove sessions. Leave a day empty for rest.</p>
+      <div id="weekGrid"></div>
+      <div style="margin-top:12px"><label class="chk"><input type="checkbox" id="drinkTog"> Night out this weekend</label></div>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" id="buildBtn">Build the week &rarr;</button>
+        <button class="btn ghost" id="clearBtn">Reset to standard</button>
+      </div>
     </div>
   </div>
-  <div id="weekOut"></div>
 </section>
 
 <!-- ============ TRAINING ============ -->
@@ -441,6 +427,8 @@ render('t-cards',TREATS);
 render('t-other',OTHER);
 
 /* ---------- planner ---------- */
+var MODE='standard';
+var TREATSALL=TREATS.concat(OTHER);
 var PDAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 var SESS=[
   {id:'legham',label:'Legs: hamstrings',load:2,gym:true,focus:'Hamstring-focused legs. RDLs, curls, split squats.'},
@@ -462,6 +450,7 @@ PDAYS.forEach(function(d){WEEK[d]=(PDEFAULT[d]||[]).slice()});
     var chips=document.createElement('div'); chips.className='pchips';
     SESS.forEach(function(s){
       var c=document.createElement('button'); c.className='pchip'; c.type='button'; c.innerHTML=s.label;
+      c.setAttribute('data-d',d); c.setAttribute('data-s',s.id);
       if(WEEK[d].indexOf(s.id)>-1){ c.classList.add('on'); if(s.run) c.classList.add('run'); if(s.pil) c.classList.add('pil'); }
       c.addEventListener('click',function(){
         var arr=WEEK[d]; var i=arr.indexOf(s.id);
@@ -472,20 +461,30 @@ PDAYS.forEach(function(d){WEEK[d]=(PDEFAULT[d]||[]).slice()});
     });
     row.appendChild(nm); row.appendChild(chips); grid.appendChild(row);
   });
-  document.getElementById('buildBtn').addEventListener('click',buildWeek);
+  function syncChips(){
+    grid.querySelectorAll('.pchip').forEach(function(c){
+      var d=c.getAttribute('data-d'), sid=c.getAttribute('data-s'), s=SESS.filter(function(x){return x.id===sid})[0];
+      var on=WEEK[d].indexOf(sid)>-1;
+      c.classList.toggle('on',on);
+      c.classList.toggle('run', on && s && s.run);
+      c.classList.toggle('pil', on && s && s.pil);
+    });
+  }
+  function gotoWeek(){ var t=document.querySelector('.tab[data-v="week"]'); if(t) t.click(); }
+  document.getElementById('buildBtn').addEventListener('click',function(){ MODE='custom'; buildWeek(); gotoWeek(); });
   document.getElementById('clearBtn').addEventListener('click',function(){
     PDAYS.forEach(function(d){WEEK[d]=(PDEFAULT[d]||[]).slice()});
-    grid.querySelectorAll('.pchip').forEach(function(c){
-      c.classList.remove('on','run','pil');
+    syncChips();
+  });
+  document.querySelectorAll('#modeSegs .seg').forEach(function(sg){
+    sg.addEventListener('click',function(){
+      document.querySelectorAll('#modeSegs .seg').forEach(function(x){x.classList.remove('on')});
+      sg.classList.add('on');
+      var mode=sg.getAttribute('data-mode');
+      var panel=document.getElementById('customPanel'), msg=document.getElementById('stdMsg');
+      if(mode==='custom'){ panel.style.display='block'; msg.style.display='none'; syncChips(); }
+      else { panel.style.display='none'; msg.style.display='block'; MODE='standard'; PDAYS.forEach(function(d){WEEK[d]=(PDEFAULT[d]||[]).slice()}); syncChips(); buildWeek(); }
     });
-    PDAYS.forEach(function(d,ri){
-      var row=grid.querySelectorAll('.pday')[ri];
-      row.querySelectorAll('.pchip').forEach(function(c,ci){
-        var s=SESS[ci];
-        if(WEEK[d].indexOf(s.id)>-1){ c.classList.add('on'); if(s.run) c.classList.add('run'); if(s.pil) c.classList.add('pil'); }
-      });
-    });
-    buildWeek();
   });
   buildWeek();
 })();
@@ -500,7 +499,7 @@ function dayMeta(ids){
 }
 function buildWeek(){
   var out=document.getElementById('weekOut');
-  var drink=document.getElementById('drinkTog').checked;
+  var dt=document.getElementById('drinkTog'); var drink=dt?dt.checked:false;
   var metas=PDAYS.map(function(d){return dayMeta(WEEK[d])});
   var gymCount=metas.filter(function(m){return m.gym}).length;
   var runCount=metas.filter(function(m){return m.run}).length;
@@ -519,17 +518,60 @@ function buildWeek(){
   function carbOf(m){ if(m.empty) return 'Protein high, carbs steady'; if(m.gym) return 'Fuel to build'; if(m.pil) return 'Eat normally'; return 'Medium carb'; }
   function fuelNote(m){
     if(m.empty) return 'A rest day is still an eating day. Keep protein high across your feeds, don\'t drop the food, this is when you grow. Carbs can come down slightly.';
-    if(m.gym) return 'Gym before school: small carb snack first (apple, rice cakes + honey), protein shake straight after, then your reheatable breakfast at school. Keep ~110&ndash;120g protein across the day.';
+    if(m.gym) return 'Gym before school: small carb snack first, protein shake straight after, then your reheatable breakfast at school. Keep ~110&ndash;120g protein across the day.';
     if(m.pil) return 'Pilates is light, so just eat normally with protein at every feed. A relaxed dinner before the class.';
     return 'Some carbs before the run, a protein feed after. Keep it conversational.';
   }
   function treatNote(m){
     if(m.gym) return 'Good day to use a treat with a job: protein pancakes or a mug cake post-workout.';
-    if(m.empty) return 'If you want something sweet, make it one that carries protein (see Treats).';
+    if(m.empty) return 'If you want something sweet, make it one that carries protein.';
     return 'A protein hot chocolate or pancakes work well after Pilates or a run.';
+  }
+  function feedsFor(m){
+    var fe=[];
+    if(m.gym){
+      fe.push({label:'Before gym (small carb)', note:'A Pink Lady apple, rice cakes + honey, or a small pot of oats, 20&ndash;30 min before.'});
+      fe.push({label:'After gym (shake)', note:'Protein shake straight after, keep one in your bag.'});
+      fe.push({label:'Breakfast at school', time:'reheat', cat:'breakfast'});
+      fe.push({label:'Lunch', cat:'lunch'});
+      fe.push({label:'Afternoon snack / picky', cat:'picky'});
+      fe.push({label:'Dinner', cat:'dinner'});
+      fe.push({label:'Treat', cat:'treat'});
+    } else if(m.run){
+      fe.push({label:'Breakfast', cat:'breakfast'});
+      fe.push({label:'Mid-morning snack', cat:'picky'});
+      fe.push({label:'Pre-run', note:'A bit of carb before, e.g. toast or a few rice cakes.'});
+      fe.push({label:'Lunch', cat:'lunch'});
+      fe.push({label:'Dinner', cat:'dinner'});
+      fe.push({label:'Treat', cat:'treat'});
+    } else if(m.pil){
+      fe.push({label:'Breakfast', cat:'breakfast'});
+      fe.push({label:'Mid-morning snack', cat:'picky'});
+      fe.push({label:'Lunch', cat:'lunch'});
+      fe.push({label:'Dinner', note:'A relaxed dinner before class.', cat:'dinner'});
+      fe.push({label:'Treat', cat:'treat'});
+    } else {
+      fe.push({label:'Breakfast', cat:'breakfast'});
+      fe.push({label:'Mid-morning snack', cat:'picky'});
+      fe.push({label:'Lunch', cat:'lunch'});
+      fe.push({label:'Dinner', cat:'dinner'});
+      fe.push({label:'Treat', cat:'treat'});
+    }
+    return fe;
+  }
+  function feedHtml(fe){
+    return fe.map(function(fd){
+      var list = fd.cat==='treat'?TREATSALL:(fd.cat?MEALS[fd.cat]:null);
+      var opts = list ? list.map(function(mm){return '<div style="margin:4px 0"><b>'+mm.n+'</b> <span class="muted">'+mm.b+'</span></div>'}).join('') : '';
+      var body=(fd.note?'<div class="muted" style="margin-bottom:'+(opts?'8px':'0')+'">'+fd.note+'</div>':'')+opts;
+      return '<div class="feed"><div class="fhead"><span><b>'+fd.label+'</b>'+(fd.time?'<span class="ftime">'+fd.time+'</span>':'')+'</span><span class="caret">&#9656;</span></div><div class="fbody">'+body+'</div></div>';
+    }).join('');
   }
 
   var html='';
+  html+= (MODE==='custom')
+    ? '<div class="callout c-info" style="margin-top:0"><b>Your customised week</b>, built from the Planner. Tap Standard week in the Planner to go back to your usual.</div>'
+    : '<div class="callout c-good" style="margin-top:0"><b>Standard week</b> &mdash; your usual shape. To change it, open the Planner tab and tap Customise.</div>';
   var sumCls = warns.length? 'c-warn':'c-good';
   html+='<div class="callout '+sumCls+'"><b>Your week.</b> '+gymCount+' gym, '+pilCount+' Pilates, '+runCount+' run'+(runCount===1?'':'s')+', '+restCount+' rest day'+(restCount===1?'':'s')+'.';
   if(warns.length){ html+='<ul class="clean" style="margin:6px 0 0">'+li(warns)+'</ul>'; } else { html+=' Nicely balanced for building.'; }
@@ -544,12 +586,14 @@ function buildWeek(){
     if(m.gym) html+=' <span class="pill p-school" style="vertical-align:middle">Before school</span>';
     if(!m.empty){ html+='<p class="muted" style="margin:8px 0 4px"><b>Session.</b></p><ul class="clean muted" style="margin:0">'+li(m.real.map(function(s){return s.focus}))+'</ul>'; }
     html+='<p class="muted" style="margin:8px 0 6px"><b>Fuel.</b> '+fuelNote(m)+'</p>';
-    html+='<p class="muted" style="margin:0"><b>Treat.</b> '+treatNote(m)+'</p>';
+    html+= feedHtml(feedsFor(m));
+    html+='<p class="muted" style="margin:8px 0 0"><b>Treat.</b> '+treatNote(m)+'</p>';
     if(drink && isWeekend){ html+='<p class="muted" style="margin:8px 0 0"><span class="pill p-rest">Night out</span> Eat a proper protein meal before, water between drinks, and get protein and food in tomorrow. Don\'t let it cost you a session.</p>'; }
     html+='</div>';
   }
   html+='<div class="callout c-info"><b>Every day:</b> protein at every feed (5&ndash;6 small ones beats big plates), a bit more food than feels natural, ~2&ndash;2.5 L water, and good sleep. If you\'re not hungry, that\'s exactly when a shake or a picky plate earns its place.</div>';
   out.innerHTML=html;
+  out.querySelectorAll('.feed').forEach(function(fe){ fe.querySelector('.fhead').addEventListener('click',function(){ fe.classList.toggle('open'); }); });
 }
 </script>
 </body>
