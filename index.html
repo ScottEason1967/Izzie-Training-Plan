@@ -15,7 +15,7 @@
   html,body{margin:0;padding:0}
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
   .wrap{max-width:960px;margin:0 auto;padding:0 16px 80px}
-  header.top{padding:26px 16px 22px;background:linear-gradient(120deg,#ff3d71 0%,#ff6a3d 42%,#00cfc0 100%);border-bottom:none}
+  header.top{padding:26px 16px 22px;background:linear-gradient(120deg,#ff3d71 0%,#ff6a3d 42%,#00cfc0 100%)}
   .top .inner{max-width:960px;margin:0 auto}
   .kicker{color:rgba(255,255,255,.9);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:12px}
   h1{margin:4px 0 4px;font-size:34px;letter-spacing:2px;color:#fff}
@@ -40,14 +40,17 @@
   .pill{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:6px;margin:0 6px 6px 0}
   .p-gym{background:rgba(255,61,113,.16);color:#ff87a8;border:1px solid rgba(255,61,113,.4)}
   .p-run{background:rgba(0,224,198,.14);color:#4fe9d8;border:1px solid rgba(0,224,198,.34)}
+  .p-pil{background:rgba(255,210,63,.14);color:#ffdf7a;border:1px solid rgba(255,210,63,.34)}
   .p-rest{background:rgba(139,129,163,.18);color:#c4bcd6;border:1px solid rgba(139,129,163,.34)}
   .p-carb{background:rgba(255,210,63,.14);color:#ffdf7a;border:1px solid rgba(255,210,63,.34)}
   .p-prot{background:rgba(0,224,198,.14);color:#4fe9d8;border:1px solid rgba(0,224,198,.34)}
   .p-quick{background:rgba(255,210,63,.14);color:#ffdf7a;border:1px solid rgba(255,210,63,.34)}
   .p-pack{background:rgba(160,120,247,.16);color:#c9b3ff;border:1px solid rgba(160,120,247,.36)}
+  .p-school{background:rgba(0,224,198,.14);color:#4fe9d8;border:1px solid rgba(0,224,198,.34)}
   .day{border-left:3px solid var(--line)}
   .day.gym{border-left-color:var(--accent)}
   .day.run{border-left-color:var(--accent2)}
+  .day.pil{border-left-color:var(--pop)}
   .day.rest{border-left-color:var(--rest)}
   .dhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
   .dday{font-size:18px;font-weight:800}
@@ -80,11 +83,11 @@
   .mbody{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:14px}
   .meal.open .mbody{display:block}
   .mbody .lbl{color:var(--accent);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+  .mbody .rlbl{color:var(--accent2);font-weight:800}
   .trackrow{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
   .trackrow label{flex:1 1 auto;font-weight:600}
   .trackrow input{flex:0 0 130px;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:8px 10px;font-size:14px}
   .foot{color:var(--mut);font-size:13px;text-align:center;margin-top:30px}
-  /* planner */
   .pday{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
   .pday:first-child{border-top:none}
   .pdname{flex:0 0 40px;font-weight:800;font-size:14px;padding-top:6px}
@@ -93,6 +96,7 @@
   .pchip:hover{border-color:var(--accent)}
   .pchip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
   .pchip.on.run{background:var(--accent2);color:#04241f;border-color:var(--accent2)}
+  .pchip.on.pil{background:var(--pop);color:#2a2200;border-color:var(--pop)}
   .btn{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-weight:800;font-size:15px;cursor:pointer;margin-top:4px}
   .btn:hover{filter:brightness(1.08)}
   .btn.ghost{background:transparent;color:var(--mut);border:1px solid var(--line)}
@@ -107,12 +111,12 @@
   <div class="inner">
     <div class="kicker">Lean &amp; Strong &middot; Izzie</div>
     <h1>IZZIE</h1>
-    <div class="sub">Build lean, athletic muscle on a naturally slim frame. The plan: train with progression, fuel enough to grow, and use the food in a way that actually fits your day.</div>
+    <div class="sub">Build lean, athletic muscle on a naturally slim frame. Train with progression, fuel enough to grow, and make the food fit around teaching and early gym starts.</div>
     <div class="stats">
       <span class="chip">Goal <b>Lean muscle</b></span>
       <span class="chip">Height <b>5'7"</b></span>
       <span class="chip">Gym <b>David Lloyd Teesside</b></span>
-      <span class="chip"><b>4 lifts + 2 runs</b></span>
+      <span class="chip"><b>4 gym + Pilates + a run</b></span>
     </div>
   </div>
 </header>
@@ -131,43 +135,44 @@
 
 <!-- ============ THIS WEEK ============ -->
 <section class="view active" id="week">
-  <p class="lead">A default week that hits four gym sessions, two runs and a proper rest day, with the muscle groups spaced so nothing gets hammered two days running. When your week moves, rebuild it in the <b>Planner</b> tab.</p>
+  <p class="lead">Your week: four gym sessions, Pilates on Thursday, an easy run and a rest day. Weekday gym is <b>before school</b>, so those days run on a small carb snack, then a shake and a reheatable breakfast once you're at school. Recipes are all on the Fuel and Treats tabs.</p>
 
-  <div class="callout c-info"><b>The one rule.</b> Muscle is built by two things: enough food and progressive training. On a slim frame, not eating enough is the thing that holds you back, so the plan leans on frequent, protein-rich feeds rather than three big plates you can't finish. Rest days are when the building actually happens, so they're not optional.</div>
+  <div class="callout c-info"><b>The one rule.</b> Muscle is built by enough food and progressive training. On a slim frame, under-eating is what holds you back, so lean on frequent, protein-rich feeds through the day rather than big plates. The rest day matters, it's when you actually grow.</div>
 
-  <div class="card day gym"><div class="dhead"><span class="dday">Monday</span><span class="dtag">Gym &middot; Upper A</span></div>
-    <span class="pill p-gym">Strength</span><span class="pill p-carb">Fuel to build</span>
-    <p class="muted" style="margin:6px 0 0">Upper body, push and pull. Carbs before and after, protein shake or pancakes post-session.</p></div>
+  <div class="card day gym"><div class="dhead"><span class="dday">Monday</span><span class="dtag">Gym &middot; Legs (hamstrings) &middot; before school</span></div>
+    <span class="pill p-gym">Strength</span><span class="pill p-carb">Fuel to build</span><span class="pill p-school">School breakfast</span>
+    <p class="muted" style="margin:6px 0 0"><b>Before gym:</b> small carb snack (a Pink Lady apple, or rice cakes + honey). <b>After gym:</b> protein shake, then your reheatable breakfast at school (egg muffins or overnight oats). Then picky lunch, afternoon snack, dinner, a protein treat.</p></div>
 
-  <div class="card day gym"><div class="dhead"><span class="dday">Tuesday</span><span class="dtag">Gym &middot; Lower A</span></div>
-    <span class="pill p-gym">Strength</span><span class="pill p-carb">Fuel to build</span>
-    <p class="muted" style="margin:6px 0 0">Legs and glutes. Eat well, this is a big one for shape. Refuel properly after.</p></div>
+  <div class="card day gym"><div class="dhead"><span class="dday">Tuesday</span><span class="dtag">Gym &middot; Back &amp; biceps &middot; before school</span></div>
+    <span class="pill p-gym">Strength</span><span class="pill p-carb">Fuel to build</span><span class="pill p-school">School breakfast</span>
+    <p class="muted" style="margin:6px 0 0">Same shape as Monday: carb snack before, shake + reheatable breakfast at school after. Keep protein topped up across the day.</p></div>
 
-  <div class="card day run"><div class="dhead"><span class="dday">Wednesday</span><span class="dtag">Run &middot; easy</span></div>
+  <div class="card day gym"><div class="dhead"><span class="dday">Wednesday</span><span class="dtag">Gym &middot; Shoulders, chest &amp; triceps &middot; before school</span></div>
+    <span class="pill p-gym">Strength</span><span class="pill p-carb">Fuel to build</span><span class="pill p-school">School breakfast</span>
+    <p class="muted" style="margin:6px 0 0">Push day. Progress a lift from last week. Fuel exactly as Mon/Tue, before school.</p></div>
+
+  <div class="card day pil"><div class="dhead"><span class="dday">Thursday</span><span class="dtag">Pilates (evening)</span></div>
+    <span class="pill p-pil">Pilates</span><span class="pill p-prot">Protein high</span>
+    <p class="muted" style="margin:6px 0 0">Nice and light, great for your core and recovery. No special fuelling, just eat normally through the day with protein at every feed. A relaxed dinner beforehand.</p></div>
+
+  <div class="card day run"><div class="dhead"><span class="dday">Friday</span><span class="dtag">Run &middot; easy</span></div>
     <span class="pill p-run">Easy run</span><span class="pill p-carb">Medium carb</span>
-    <p class="muted" style="margin:6px 0 0">30&ndash;40 min Zone 2, conversational. Keeps the engine ticking without eating into the muscle you're building.</p></div>
+    <p class="muted" style="margin:6px 0 0">Easy run, building from your 3k (see the Training tab for how to progress). A bit of carb before, a protein feed after. If there's a night out, eat well first.</p></div>
 
-  <div class="card day gym"><div class="dhead"><span class="dday">Thursday</span><span class="dtag">Gym &middot; Upper B</span></div>
+  <div class="card day gym"><div class="dhead"><span class="dday">Saturday</span><span class="dtag">Gym &middot; Legs (glutes)</span></div>
     <span class="pill p-gym">Strength</span><span class="pill p-carb">Fuel to build</span>
-    <p class="muted" style="margin:6px 0 0">Back, shoulders and arms focus. Progress the weight or reps from last week.</p></div>
-
-  <div class="card day gym"><div class="dhead"><span class="dday">Friday</span><span class="dtag">Gym &middot; Lower B</span></div>
-    <span class="pill p-gym">Strength</span><span class="pill p-carb">Fuel to build</span>
-    <p class="muted" style="margin:6px 0 0">Glute and hamstring focus. Then enjoy your weekend, food stays on track.</p></div>
-
-  <div class="card day run"><div class="dhead"><span class="dday">Saturday</span><span class="dtag">Run &middot; faster / parkrun</span></div>
-    <span class="pill p-run">Faster run</span><span class="pill p-carb">Medium carb</span>
-    <p class="muted" style="margin:6px 0 0">Intervals or a parkrun 5k. If there's a night out, eat well first (see Fuel).</p></div>
+    <p class="muted" style="margin:6px 0 0">Your weekend session, glute focus, so no early start, go when it suits. Fuel before and refuel properly after, then enjoy the weekend.</p></div>
 
   <div class="card day rest"><div class="dhead"><span class="dday">Sunday</span><span class="dtag">Rest</span></div>
     <span class="pill p-rest">Rest &amp; build</span><span class="pill p-prot">Protein high</span>
-    <p class="muted" style="margin:6px 0 0">Full rest. Keep eating properly, this is when the muscle actually grows. Light walk and a stretch if you fancy it.</p></div>
+    <p class="muted" style="margin:6px 0 0">Full rest, and this is when the muscle actually grows. Keep eating properly. Good day to batch-cook: egg muffins, a pasta pot, boiled eggs, so the week's easy. A second easy run is fine here if you fancy it, but a proper rest day is better.</p></div>
+
+  <div class="callout c-info"><b>Following a different week?</b> Set it in the Planner tab and it'll build the fuel and checks around whatever you're actually doing.</div>
 </section>
 
 <!-- ============ PLANNER ============ -->
 <section class="view" id="planner">
-  <p class="lead">Your week moves, so build the real one. Tap what you're actually doing each day and it sets the fuel and the focus to match, keeps protein high every day, and checks you've got enough gym sessions and a proper rest day. Nothing saves, so it's a quick weekly set-up.</p>
-
+  <p class="lead">Your week moves, so build the real one. Tap what you're actually doing each day. It sets the fuel focus, keeps protein high, and checks you've got your four gym sessions and a rest day. Nothing saves, so it's a quick weekly set-up.</p>
   <div class="card">
     <h3>Set your week</h3>
     <p class="muted" style="margin:4px 0 10px">Tap to add or remove. Leave a day empty for rest. It opens on your usual shape &mdash; change whatever's different.</p>
@@ -175,7 +180,7 @@
     <div style="margin-top:12px"><label class="chk"><input type="checkbox" id="drinkTog"> Night out this weekend</label></div>
     <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn" id="buildBtn">Build the week &rarr;</button>
-      <button class="btn ghost" id="clearBtn">Clear all</button>
+      <button class="btn ghost" id="clearBtn">Reset to standard</button>
     </div>
   </div>
   <div id="weekOut"></div>
@@ -183,64 +188,77 @@
 
 <!-- ============ TRAINING ============ -->
 <section class="view" id="training">
-  <p class="lead">A four-day Upper/Lower split, each muscle trained twice a week, which is what builds shape efficiently around a busy job. Sessions run 45&ndash;60 minutes. The whole game is <b>progressive overload</b>: beat last week, even by a rep.</p>
+  <p class="lead">Four gym sessions a week the way you want them: two leg days, one pull day, one push day, plus Pilates on Thursday. Sessions 45&ndash;60 minutes. The whole game is <b>progressive overload</b>: beat last week, even by a rep.</p>
 
-  <div class="callout c-hot"><b>How to progress (this is the important bit).</b> Pick a weight you can do for the bottom of the rep range with good form. Each week, add a rep or two. Once you hit the top of the range on every set, go up a little in weight next time and start again. Log the main lifts on the Track tab, if the numbers climb, the muscle follows. Rest 60&ndash;90s between sets, up to 2 min on the heavy compound lifts. Warm up 5 min plus a lighter set or two before your first big lift.</div>
+  <div class="callout c-hot"><b>How to progress.</b> Pick a weight you can do for the bottom of the rep range with good form. Each week add a rep or two. When you hit the top of the range on every set, go up a little in weight and start again. Log the main lifts on the Track tab. Rest 60&ndash;90s between sets, up to 2 min on the big lifts. Warm up 5 min plus a lighter set before your first working set.</div>
 
-  <h2 class="vh">Upper A</h2>
+  <div class="callout c-info"><b>Gym before school.</b> Early starts are great, just get a small carb snack in first (see Fuel), keep the session tight and focused (45 min is plenty), and have your protein and breakfast sorted for straight after and at school.</div>
+
+  <h2 class="vh">Legs A &mdash; hamstring focus</h2>
   <div class="card"><table class="tg">
     <tr><th>Exercise</th><th>Sets &times; reps</th></tr>
-    <tr><td><b>Dumbbell or barbell bench press</b></td><td>4 &times; 6&ndash;10</td></tr>
-    <tr><td>Seated cable row</td><td>4 &times; 8&ndash;12</td></tr>
-    <tr><td>Dumbbell shoulder press</td><td>3 &times; 8&ndash;12</td></tr>
-    <tr><td>Lat pulldown</td><td>3 &times; 8&ndash;12</td></tr>
-    <tr><td>Dumbbell bicep curl</td><td>3 &times; 10&ndash;12</td></tr>
-    <tr><td>Tricep rope pushdown</td><td>3 &times; 10&ndash;12</td></tr>
-    <tr><td>Plank</td><td>3 &times; 30&ndash;45s</td></tr>
+    <tr><td><b>Romanian deadlift</b></td><td>4 &times; 8&ndash;10</td></tr>
+    <tr><td>Seated leg curl</td><td>4 &times; 10&ndash;12</td></tr>
+    <tr><td>Lying leg curl</td><td>3 &times; 10&ndash;12</td></tr>
+    <tr><td>Bulgarian split squat</td><td>3 &times; 8&ndash;10 each</td></tr>
+    <tr><td>Back extension (hip hinge)</td><td>3 &times; 12&ndash;15</td></tr>
+    <tr><td>Calf raise</td><td>3 &times; 15</td></tr>
   </table></div>
 
-  <h2 class="vh">Lower A</h2>
-  <div class="card"><table class="tg">
-    <tr><th>Exercise</th><th>Sets &times; reps</th></tr>
-    <tr><td><b>Goblet or barbell squat</b></td><td>4 &times; 6&ndash;10</td></tr>
-    <tr><td>Romanian deadlift</td><td>3 &times; 8&ndash;10</td></tr>
-    <tr><td>Walking lunges</td><td>3 &times; 10&ndash;12 each leg</td></tr>
-    <tr><td>Seated leg curl</td><td>3 &times; 10&ndash;12</td></tr>
-    <tr><td>Barbell or machine hip thrust</td><td>3 &times; 8&ndash;12</td></tr>
-    <tr><td>Calf raise</td><td>3 &times; 12&ndash;15</td></tr>
-  </table></div>
-
-  <h2 class="vh">Upper B</h2>
-  <div class="card"><table class="tg">
-    <tr><th>Exercise</th><th>Sets &times; reps</th></tr>
-    <tr><td><b>Incline dumbbell press</b></td><td>4 &times; 8&ndash;12</td></tr>
-    <tr><td>Assisted pull-ups or wide lat pulldown</td><td>3 &times; 8&ndash;12</td></tr>
-    <tr><td>Dumbbell lateral raise</td><td>3 &times; 12&ndash;15</td></tr>
-    <tr><td>Chest-supported row</td><td>3 &times; 10&ndash;12</td></tr>
-    <tr><td>Face pulls</td><td>3 &times; 12&ndash;15</td></tr>
-    <tr><td>Cable or hammer curl</td><td>3 &times; 10&ndash;12</td></tr>
-    <tr><td>Overhead tricep extension</td><td>3 &times; 10&ndash;12</td></tr>
-  </table></div>
-
-  <h2 class="vh">Lower B &mdash; glute &amp; hamstring focus</h2>
+  <h2 class="vh">Legs B &mdash; glute focus</h2>
   <div class="card"><table class="tg">
     <tr><th>Exercise</th><th>Sets &times; reps</th></tr>
     <tr><td><b>Barbell hip thrust</b></td><td>4 &times; 8&ndash;12</td></tr>
-    <tr><td>Bulgarian split squat</td><td>3 &times; 8&ndash;10 each leg</td></tr>
-    <tr><td>Leg press</td><td>3 &times; 10&ndash;12</td></tr>
-    <tr><td>Seated leg curl</td><td>3 &times; 12&ndash;15</td></tr>
     <tr><td>Cable glute kickback</td><td>3 &times; 12&ndash;15 each</td></tr>
-    <tr><td>Leg extension</td><td>3 &times; 12&ndash;15</td></tr>
+    <tr><td>Sumo leg press (feet high)</td><td>3 &times; 10&ndash;12</td></tr>
+    <tr><td>Bulgarian split squat (forward lean)</td><td>3 &times; 8&ndash;10 each</td></tr>
+    <tr><td>Hip abduction machine</td><td>3 &times; 15</td></tr>
+    <tr><td>Walking lunges</td><td>3 &times; 12 each</td></tr>
   </table></div>
 
-  <h2 class="vh">The two runs</h2>
-  <div class="card"><h3>Easy run</h3><p class="muted" style="margin:6px 0 0">30&ndash;40 min at a conversational pace (Zone 2). Builds your aerobic base and helps recovery without burning the fuel you need to build. Ideally not straight after a heavy leg day.</p></div>
-  <div class="card"><h3>Faster run</h3><p class="muted" style="margin:6px 0 0">Once a week. A parkrun 5k, or 20&ndash;30 min with intervals (e.g. 6&ndash;8 &times; 1 min hard, 1&ndash;2 min easy). Keep it to one, cardio is a supporting act here, not the main event.</p></div>
+  <h2 class="vh">Back &amp; biceps</h2>
+  <div class="card"><table class="tg">
+    <tr><th>Exercise</th><th>Sets &times; reps</th></tr>
+    <tr><td><b>Lat pulldown</b></td><td>4 &times; 8&ndash;12</td></tr>
+    <tr><td>Seated cable row</td><td>4 &times; 8&ndash;12</td></tr>
+    <tr><td>Assisted pull-ups</td><td>3 &times; 8&ndash;10</td></tr>
+    <tr><td>Single-arm dumbbell row</td><td>3 &times; 10&ndash;12 each</td></tr>
+    <tr><td>Face pulls</td><td>3 &times; 12&ndash;15</td></tr>
+    <tr><td>Dumbbell bicep curl</td><td>3 &times; 10&ndash;12</td></tr>
+    <tr><td>Hammer curl</td><td>3 &times; 10&ndash;12</td></tr>
+  </table></div>
+
+  <h2 class="vh">Shoulders, chest &amp; triceps</h2>
+  <div class="card"><table class="tg">
+    <tr><th>Exercise</th><th>Sets &times; reps</th></tr>
+    <tr><td><b>Dumbbell shoulder press</b></td><td>4 &times; 8&ndash;12</td></tr>
+    <tr><td>Incline dumbbell press</td><td>4 &times; 8&ndash;12</td></tr>
+    <tr><td>Dumbbell lateral raise</td><td>3 &times; 12&ndash;15</td></tr>
+    <tr><td>Cable fly or chest press</td><td>3 &times; 10&ndash;12</td></tr>
+    <tr><td>Rear delt reverse fly</td><td>3 &times; 12&ndash;15</td></tr>
+    <tr><td>Tricep rope pushdown</td><td>3 &times; 10&ndash;12</td></tr>
+    <tr><td>Overhead tricep extension</td><td>3 &times; 10&ndash;12</td></tr>
+  </table></div>
+
+  <h2 class="vh">Pilates &mdash; Thursday night</h2>
+  <div class="card"><p class="muted" style="margin:0">Keep it, it's a brilliant complement to the lifting. It builds core strength and hip stability (which makes your squats, hip thrusts and RDLs stronger and safer), improves posture and mobility, and works as gentle active recovery between gym days. No special fuelling, just a normal day of eating. Think of it as part of the training, not extra to it.</p></div>
+
+  <h2 class="vh">Running &mdash; how to build from 3k</h2>
+  <div class="card">
+    <p class="muted" style="margin:0 0 8px">You can do 3k comfortably, so start there and build slowly. The aim is a comfortable 5k, then you can play with pace. Keep every run <b>easy and conversational</b>, running is the supporting act here, not the main event, so it shouldn't leave you wrecked for the gym.</p>
+    <ul class="clean muted">
+      <li><b>Weeks 1&ndash;2:</b> 3k easy, once or twice a week. Nail the easy pace, you should be able to hold a conversation.</li>
+      <li><b>Weeks 3&ndash;4:</b> push to 3.5&ndash;4k. Add distance <i>or</i> pace, never both at once.</li>
+      <li><b>Weeks 5&ndash;6:</b> build to 4.5&ndash;5k. A local parkrun is a nice way to hit 5k with company.</li>
+      <li><b>Once 5k feels easy:</b> keep one easy 5k, and if you want, add the odd faster run or a few intervals.</li>
+    </ul>
+    <p class="muted" style="margin:8px 0 0">Rules of thumb: don't run the day after a leg day if your legs are heavy, and if running ever starts eating into your gym recovery, cut it back. The lifting comes first for the shape you're after.</p>
+  </div>
 </section>
 
 <!-- ============ FUEL ============ -->
 <section class="view" id="fuel">
-  <p class="lead">This is where it's won or lost. You struggle with big plates and then graze an hour later, so we build the whole thing around that: smaller, protein-rich feeds, five or six times a day, with proper picky plates so the grazing works for you instead of against you.</p>
+  <p class="lead">This is where it's won or lost. You struggle with big plates and graze an hour later, so we build around that: smaller, protein-rich feeds five or six times a day, plus proper picky plates. And because gym is before school, your morning is a small snack, then a shake and a breakfast you heat up once you're in.</p>
 
   <div class="num">
     <div class="stat"><div class="k">Protein</div><div class="v">~110&ndash;120 g <small>/ day</small></div></div>
@@ -249,105 +267,107 @@
     <div class="stat"><div class="k">Water</div><div class="v">~2&ndash;2.5 L</div></div>
   </div>
 
-  <div class="callout c-hot"><b>Eat a bit more than feels natural.</b> To build, you need to be in a small surplus, a little more food than you'd naturally reach for. On a slim frame that's the number one lever. You don't do it with giant meals, you do it by never skipping a feed and adding calorie-dense extras: a handful of oats, cheese, olive oil on the veg, a shake. If your weight holds dead still for a few weeks, you're not eating enough, add a feed.</div>
+  <div class="callout c-hot"><b>Eat a bit more than feels natural.</b> To build, you need a small surplus, a little more food than you'd naturally reach for. On a slim frame that's the number one lever. You don't do it with giant meals, you do it by never skipping a feed and adding calorie-dense extras: a scoop of protein, cheese, olive oil on the veg, a handful of nuts. If your weight holds dead still for a few weeks, add a feed.</div>
 
-  <h2 class="vh">The picky plate &mdash; your secret weapon</h2>
-  <div class="card"><p class="muted" style="margin:0">When a full meal feels like too much, build a picky plate instead. The rule: a protein, a carb, and something fresh. Aim for a proper hit of protein in it. Examples: cold chicken or ham + cheese + crackers + veg sticks + hummus + a Pink Lady apple. Boiled eggs + cheese + oatcakes. Tuna or salmon + rice cakes + cucumber. It feels like snacking, but it's a real meal doing a real job.</p></div>
+  <h2 class="vh">A gym morning, before school</h2>
+  <div class="card"><p class="muted" style="margin:0">The order that works: <b>1.</b> Small carb snack when you wake (see below), 20&ndash;30 min before you train. <b>2.</b> Train. <b>3.</b> Protein shake straight after (keep one in your bag). <b>4.</b> Your reheatable breakfast at school mid-morning, protein and carbs to properly refuel. Then your normal feeds through the day. On Pilates and rest days you don't need the early snack, just eat normally with protein at each feed.</p></div>
 
-  <h2 class="vh">Breakfast</h2>
+  <h2 class="vh">Pre-gym carb snack (small &amp; early)</h2>
+  <div class="card"><p class="muted" style="margin:0">Something small and easy on the stomach, 20&ndash;30 minutes before: a <b>Pink Lady apple</b>, a <b>couple of rice cakes with honey</b>, a <b>small pot of oats</b>, or a <b>slice of toast with honey or jam</b>. If you really can't eat that early, even half an apple or a few sips of a carb/electrolyte drink will do, then get your protein in straight after.</p></div>
+
+  <h2 class="vh">Breakfasts you can heat up at school</h2>
+  <p class="muted" style="margin-top:-4px">Made ahead, reheated in the staff-room microwave. These are your gym-day breakfasts. Tap any for the recipe.</p>
   <div id="m-breakfast"></div>
+
   <h2 class="vh">Picky plates &amp; snacks</h2>
+  <div class="card"><p class="muted" style="margin:0 0 10px">When a full meal feels like too much, build a picky plate: a protein, a carb, something fresh. It feels like snacking but does a real job.</p></div>
   <div id="m-picky"></div>
+
   <h2 class="vh">Lunch &mdash; packable for school</h2>
   <div id="m-lunch"></div>
+
   <h2 class="vh">Dinner</h2>
   <div id="m-dinner"></div>
 
-  <h2 class="vh">Around training</h2>
-  <div class="card"><h3>Before</h3><p class="muted" style="margin:6px 0 0">You train after school, so don't go in empty. 60&ndash;90 min before: some carbs plus a bit of protein. A slice of toast with peanut butter, oatcakes and cheese, or a small bowl of porridge. Nothing heavy.</p></div>
-  <div class="card"><h3>After</h3><p class="muted" style="margin:6px 0 0">Within an hour: protein plus carbs. A shake with milk and a banana or oats, or go straight to the protein pancakes (see Treats), then dinner not long after. This window matters most on lifting days.</p></div>
+  <h2 class="vh">Around running</h2>
+  <div class="card"><p class="muted" style="margin:0">Some carbs before an easy run (a piece of toast, a few rice cakes) and a protein feed after. Nothing complicated, it's an easy run.</p></div>
 
   <h2 class="vh">Weekend drinks</h2>
-  <div class="callout c-warn"><b>Factored in, not banned.</b> A night out is fine. Just know alcohol blunts muscle-building and recovery for about a day and adds empty calories, so: eat a proper protein-rich meal before you go, alternate drinks with water, and get protein and real food in the next day rather than writing it off. The biggest setback isn't the drinks, it's the hungover day where you skip the gym and barely eat. Don't let one night cost you two days.</div>
+  <div class="callout c-warn"><b>Factored in, not banned.</b> A night out is fine. Alcohol just blunts muscle-building and recovery for about a day and adds empty calories, so: eat a proper protein-rich meal before, alternate drinks with water, and get protein and real food in the next day rather than writing it off. The biggest setback isn't the drinks, it's the hungover day where you skip the gym and barely eat.</div>
 
-  <div class="callout c-info"><b>Quick notes.</b> No Greek yoghurt anywhere, so protein comes from meat, fish, eggs, milk, cheese, cottage cheese, protein powder, and the pancakes. Fruit is Pink Lady apples, so carbs come from oats, rice, potatoes, pasta, bread and crackers rather than leaning on fruit. Keep a shake and a couple of picky-plate bits in the fridge at all times so there's always an easy feed.</div>
+  <div class="callout c-info"><b>Quick notes.</b> No Greek yoghurt, no peanut butter, no beans. Protein comes from meat, fish, eggs, milk, cheese, cottage cheese, protein powder and the pancakes. Fruit is Pink Lady apples, so lean on oats, rice, potatoes, pasta, bread and crackers for carbs. Keep a shake and a couple of picky bits in the fridge so there's always an easy feed.</div>
 </section>
 
 <!-- ============ TREATS ============ -->
 <section class="view" id="treats">
-  <p class="lead">The sweet stuff, made to earn its place. These give you a proper hit of protein while scratching the sweet itch, so use them <b>strategically</b>: post-workout when your body wants protein and carbs, or as an evening treat that quietly tops up your day. Tap any for how to make it.</p>
+  <p class="lead">The sweet stuff, made to earn its place. Each gives a proper hit of protein while scratching the sweet itch, so use them <b>strategically</b>: post-workout when your body wants protein and carbs, or as an evening treat that quietly tops up your day. Tap any for the recipe.</p>
 
-  <div class="callout c-good"><b>The base protein pancakes.</b> Blend 40g oats, 1 scoop (30g) vanilla or chocolate protein, 1 egg, a splash of milk and a teaspoon of baking powder into a batter. Cook small pancakes in a non-stick pan with a little spray oil, 1&ndash;2 min a side. Makes a stack with ~30&ndash;35g protein. That's the canvas, the toppings below make it different every time.</p></div>
+  <div class="callout c-good"><b>Base protein pancakes.</b> <span class="rlbl">Makes 1 stack (~30&ndash;35g protein).</span> Blend: 40g oats, 1 scoop (30g) vanilla or chocolate protein, 1 egg, 60ml milk, ½ tsp baking powder. Cook small pancakes in a non-stick pan with a little spray oil, 1&ndash;2 min a side until set. That's the base, the toppings below make it different every time.</div>
 
   <div id="t-cards"></div>
 
   <h2 class="vh">Other strategic sweets</h2>
   <div id="t-other"></div>
 
-  <div class="callout c-info"><b>How to use them.</b> On a lifting day, have the pancakes (or a protein mug cake) as your post-workout feed, protein and carbs when they count most. On a rest day, if you want something sweet, reach for one of these rather than something that gives you nothing back. That's the whole idea: the treat does a job.</div>
+  <div class="callout c-info"><b>How to use them.</b> On a lifting day, have the pancakes or a mug cake as your post-workout feed, protein and carbs when they count. On a rest day, if you want something sweet, reach for one of these rather than something that gives nothing back.</div>
 </section>
 
 <!-- ============ APPROACH ============ -->
 <section class="view" id="approach">
-  <p class="lead">The reasoning, straight. No fluff, so you can see it's built on something.</p>
+  <p class="lead">The reasoning, straight, so you can see it's built on something.</p>
 
   <h2 class="vh">What actually changes your shape</h2>
-  <div class="callout c-hot">You're naturally lean, which is a good starting point, but a lean frame doesn't change on its own. What changes it is <b>building muscle</b>, and muscle needs two things: a training signal and enough food to build with. The training signal is progressive overload, lifting a bit more over time. The food is a small calorie surplus with plenty of protein. Miss either and nothing much happens. For someone slim who under-eats without realising, the food side is almost always the missing piece.</div>
+  <div class="callout c-hot">You're naturally lean, which is a good start, but a lean frame doesn't change on its own. What changes it is <b>building muscle</b>, and muscle needs a training signal and enough food to build with. The signal is progressive overload. The food is a small surplus with plenty of protein. For someone slim who under-eats without realising, the food side is almost always the missing piece.</div>
 
-  <h2 class="vh">Why frequent small feeds, not big meals</h2>
-  <div class="card"><p class="muted" style="margin:0">You can't comfortably finish large plates, and forcing them just makes eating a chore you'll quit. Five or six smaller feeds hits the same daily total without the dread, keeps protein topped up through the day for muscle building, and fits a teacher's day where you can't sit down to a big lunch anyway. Your grazing habit isn't a problem to fix, it's the method.</p></div>
+  <h2 class="vh">Why frequent small feeds</h2>
+  <div class="card"><p class="muted" style="margin:0">You can't comfortably finish big plates, and forcing them makes eating a chore you'll quit. Five or six smaller feeds hit the same daily total without the dread, keep protein topped up for building, and fit a teacher's day. Your grazing habit isn't a problem to fix, it's the method.</p></div>
 
   <h2 class="vh">The numbers</h2>
   <div class="num">
     <div class="stat"><div class="k">Protein</div><div class="v">~110&ndash;120 g<small>/day</small></div></div>
     <div class="stat"><div class="k">Energy</div><div class="v">small surplus</div></div>
-    <div class="stat"><div class="k">Training</div><div class="v">4 lifts<small> + 2 easy runs</small></div></div>
+    <div class="stat"><div class="k">Training</div><div class="v">4 gym<small> + Pilates + a run</small></div></div>
   </div>
-  <p class="muted">Protein at roughly 2g per kg is the sweet spot for building muscle, spread across the day. The surplus only needs to be small, a couple of hundred calories over what you burn; more than that just adds fat, not muscle. Runs stay easy so they don't eat into it.</p>
+  <p class="muted">Protein around 2g per kg is the sweet spot for building, spread across the day. The surplus only needs to be small, a couple of hundred calories over what you burn. Pilates supports the lifting, and running stays easy so it doesn't eat into the build.</p>
 
   <h2 class="vh">The scale is not the scoreboard</h2>
-  <div class="callout c-info">Don't judge this by the scales. The real signals are your lifts going up on the Track tab, your clothes fitting differently, and how you look in the mirror over a couple of months. You may gain a kilo or two, and if your lifts are climbing, that's muscle doing exactly what you asked it to. Weigh monthly at most, if at all.</div>
+  <div class="callout c-info">Don't judge this by the scales. The real signals are your lifts going up on the Track tab, your clothes fitting differently, and how you look over a couple of months. You may gain a kilo or two, and if your lifts are climbing, that's muscle doing its job. Weigh monthly at most, if at all.</div>
 
   <h2 class="vh">Alcohol, honestly</h2>
-  <div class="card"><p class="muted" style="margin:0">A weekend drink is part of life and it's built in. The straight facts: alcohol lowers the muscle-building response for around a day after training and adds calories that don't feed the goal. So it's not off-limits, it just pays to be smart, a good meal first, water alongside, and a proper protein-rich day after. Enjoy it, then get back to it.</p></div>
+  <div class="card"><p class="muted" style="margin:0">A weekend drink is part of life and it's built in. Alcohol lowers the muscle-building response for around a day after training and adds calories that don't feed the goal, so a good meal first, water alongside, and a protein-rich day after. Enjoy it, then get back to it.</p></div>
 
   <h2 class="vh">What this is based on</h2>
   <p class="src">
     Energy surplus &amp; protein for muscle gain: <a href="https://www.researchgate.net/publication/335265607_Is_an_Energy_Surplus_Required_to_Maximize_Skeletal_Muscle_Hypertrophy_Associated_With_Resistance_Training">Slater et al., review</a>; <a href="https://www.frontiersin.org/articles/10.3389/fnut.2019.00131/full">protein distribution, Frontiers in Nutrition</a>.
-    Progressive overload for hypertrophy: standard resistance-training principle.
     Alcohol &amp; muscle protein synthesis: <a href="https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0088384">Parr et al., PLOS ONE 2014</a>; <a href="https://www.mdpi.com/2411-5142/4/3/41">recovery review, 2019</a>.
   </p>
-  <p class="src" style="margin-top:8px">This is a training and nutrition framework, not medical advice. If anything doesn't sit right, check with a GP or a coach at David Lloyd.</p>
+  <p class="src" style="margin-top:8px">A training and nutrition framework, not medical advice. If anything doesn't sit right, check with a GP or a coach at David Lloyd.</p>
 </section>
 
 <!-- ============ TRACK ============ -->
 <section class="view" id="track">
-  <p class="lead">Track the things that actually show progress. The headline is simple: are your main lifts going up? Fill this in weekly. It won't save between visits, so print it or keep your own note.</p>
-
+  <p class="lead">Track what actually shows progress: are your main lifts going up? Fill this in weekly. It won't save between visits, so print it or keep your own note.</p>
   <div class="card"><h3>Key lifts this week (weight &times; reps)</h3>
-    <div class="trackrow"><label>Squat</label><input type="text" placeholder=""></div>
+    <div class="trackrow"><label>Romanian deadlift</label><input type="text" placeholder=""></div>
     <div class="trackrow"><label>Hip thrust</label><input type="text" placeholder=""></div>
-    <div class="trackrow"><label>Bench / chest press</label><input type="text" placeholder=""></div>
-    <div class="trackrow"><label>Row</label><input type="text" placeholder=""></div>
+    <div class="trackrow"><label>Lat pulldown</label><input type="text" placeholder=""></div>
     <div class="trackrow"><label>Shoulder press</label><input type="text" placeholder=""></div>
+    <div class="trackrow"><label>Run distance (easy)</label><input type="text" placeholder=""></div>
   </div>
-
   <div class="card"><h3>The week</h3>
     <div class="trackrow"><label>Gym sessions (aim 4)</label><input type="text" placeholder=""></div>
-    <div class="trackrow"><label>Runs (aim 2)</label><input type="text" placeholder=""></div>
+    <div class="trackrow"><label>Pilates done?</label><input type="text" placeholder=""></div>
     <div class="trackrow"><label>Energy (1&ndash;10)</label><input type="text" placeholder=""></div>
     <div class="trackrow"><label>Sleep (avg h)</label><input type="text" placeholder=""></div>
     <div class="trackrow"><label>Ate enough? (Y/N)</label><input type="text" placeholder=""></div>
   </div>
-
-  <div class="callout c-info"><b>How to read it.</b> If the lifts climb week on week, it's working, keep going. If they stall for two or three weeks, the usual fix is more food and more sleep, not more training. Monthly, notice how clothes fit and take a photo in the same light; that tells you more than any single morning on the scales.</div>
+  <div class="callout c-info"><b>How to read it.</b> If the lifts climb week on week, it's working, keep going. If they stall for two or three weeks, the usual fix is more food and more sleep, not more training. Monthly, notice how clothes fit and take a photo in the same light, it tells you more than the scales.</div>
 </section>
 
 <div class="foot">Izzie &middot; Lean &amp; Strong &middot; built to grow with you.</div>
 </div>
 
 <script>
-/* ---------- tabs ---------- */
 document.querySelectorAll('.tab').forEach(function(t){
   t.addEventListener('click',function(){
     document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
@@ -358,57 +378,57 @@ document.querySelectorAll('.tab').forEach(function(t){
   });
 });
 
-/* ---------- meal / treat cards ---------- */
 var MEALS={
   breakfast:[
-    {n:"Protein pancakes",tags:["prot"],b:"The base recipe from Treats. Fast, ~30g protein, and doubles as a treat. Top with cinnamon Pink Lady apple or peanut butter."},
-    {n:"Scrambled eggs on toast + cheese",tags:["quick","prot"],b:"3 eggs, wholemeal or white toast, grated cheese. Add a slice of ham for more protein. Quick and filling without being huge."},
-    {n:"Overnight oats (no yoghurt)",tags:["quick","carb"],b:"Oats soaked in milk with a scoop of protein powder stirred in, overnight in the fridge. Grab and go on a work morning. Cinnamon and a little honey to sweeten."},
-    {n:"Omelette + toast",tags:["quick","prot"],b:"Cheese, ham or leftover chicken in a 3-egg omelette, toast on the side. A proper protein start."}
+    {n:"Egg muffins (make-ahead, reheat at school)",tags:["prot","school","pack"],b:"<span class='rlbl'>Makes 6, keeps 4 days.</span> Whisk 6 eggs with a splash of milk, salt and pepper. Stir in 60g grated cheese and chopped ham, peppers or spinach. Pour into a greased muffin tin. Bake at 180&deg;C for 18&ndash;20 min. Cool, keep in the fridge. Reheat 2&ndash;3 at school for 30&ndash;40s. ~20g protein for three."},
+    {n:"Overnight oats (microwave at school)",tags:["quick","school","carb"],b:"<span class='rlbl'>Night before.</span> In a jar: 50g oats, 150ml milk, 1 scoop vanilla protein, a shake of cinnamon. Stir, lid on, fridge overnight. Eat cold or microwave 60&ndash;90s at school. ~25g+ protein. Add a diced Pink Lady apple on top."},
+    {n:"Baked protein oats (batch, reheat)",tags:["prot","school","carb"],b:"<span class='rlbl'>Makes 4 squares.</span> Mix 120g oats, 2 scoops protein, 1 egg, 250ml milk, 1 tsp baking powder, cinnamon. Pour into a lined dish, bake 180&deg;C 20&ndash;25 min. Cut into squares, reheat one at school. Tastes like flapjack, ~20g protein a piece."},
+    {n:"Breakfast burrito (make-ahead, reheat)",tags:["prot","school","pack"],b:"<span class='rlbl'>Make a few, freeze or fridge.</span> Scramble 2&ndash;3 eggs, add cheese and cooked chicken or ham. Wrap in a tortilla, roll tight, wrap in foil. Reheat at school ~60&ndash;90s. Filling, ~25g+ protein."},
+    {n:"Protein porridge (quick, hot)",tags:["quick","carb"],b:"<span class='rlbl'>2 min.</span> 50g oats + 200ml milk, microwave 2 min, then stir in 1 scoop protein once slightly cooled (so it stays smooth). Cinnamon on top. A home option on non-gym mornings."},
+    {n:"Scrambled eggs on toast + cheese",tags:["quick","prot"],b:"<span class='rlbl'>Home mornings.</span> 3 eggs scrambled, toast, grated cheese, a slice of ham on the side for more protein. Quick and filling."}
   ],
   picky:[
-    {n:"The classic picky plate",tags:["prot","pack"],b:"Cold chicken or ham, cheese, crackers or oatcakes, cucumber and pepper sticks, hummus, a Pink Lady apple. A protein, a carb, something fresh. Feels like snacking, eats like a meal."},
-    {n:"Boiled eggs + cheese + oatcakes",tags:["quick","prot","pack"],b:"2&ndash;3 boiled eggs (do a batch), cheese, oatcakes. Cheap, portable, ~20g+ protein."},
-    {n:"Cottage cheese + crackers",tags:["quick","prot"],b:"Cottage cheese (the yoghurt-free protein hit) with crackers and cucumber, or with a little honey for something sweeter."},
-    {n:"Protein shake + a handful of nuts",tags:["quick","pack"],b:"When you can't face food but need the calories in. Shake with milk, plus almonds or cashews for calorie-dense fats."},
-    {n:"Tuna or salmon + rice cakes",tags:["quick","prot","pack"],b:"Tinned tuna/salmon mixed with a little mayo on rice cakes or crackers. Fast protein."},
-    {n:"Cheese + crackers + cold meats",tags:["quick","pack"],b:"A mini charcuterie. Add olives or pickles. Easy calories and protein when appetite is low."}
+    {n:"The classic picky plate",tags:["prot","pack"],b:"<span class='rlbl'>Assemble.</span> Cold chicken or ham, a couple of cheese cubes, crackers or oatcakes, cucumber and pepper sticks, a spoon of hummus, a Pink Lady apple. A protein, a carb, something fresh. ~25g protein."},
+    {n:"Boiled eggs + cheese + oatcakes",tags:["quick","prot","pack"],b:"<span class='rlbl'>Batch the eggs.</span> Boil 6 eggs for the week (8 min, then cold water). 2&ndash;3 with cheese and oatcakes. Cheap, portable, ~20g protein."},
+    {n:"Cottage cheese + crackers",tags:["quick","prot"],b:"<span class='rlbl'>30 sec.</span> Cottage cheese (the yoghurt-free protein hit) with crackers and cucumber, or with a little honey and cinnamon for something sweeter. ~20g protein a pot."},
+    {n:"Protein shake + a handful of nuts",tags:["quick","pack"],b:"<span class='rlbl'>For when appetite is low.</span> A scoop of protein blended with milk, plus a small handful of almonds or cashews for calorie-dense fats. Gets the calories in when you can't face food."},
+    {n:"Tuna or salmon + rice cakes",tags:["quick","prot","pack"],b:"<span class='rlbl'>2 min.</span> Tinned tuna or salmon mixed with a little mayo, spooned onto rice cakes or crackers, cucumber alongside. Fast protein."},
+    {n:"Cheese + crackers + cold meats",tags:["quick","pack"],b:"<span class='rlbl'>A mini board.</span> Cheese, crackers, sliced chicken or ham, a few olives. Easy calories and protein when appetite is low."}
   ],
   lunch:[
-    {n:"Chicken pasta pot",tags:["carb","pack","prot"],b:"Batch-cooked pasta, chicken, veg, a little pesto or light dressing. Eat cold or reheat. Perfect for a school day you can pick at."},
-    {n:"Wrap + chicken or ham",tags:["quick","pack"],b:"Tortilla, protein, salad, cheese. Rolls up, travels, eats in a five-minute break."},
-    {n:"Jacket potato + beans + cheese",tags:["carb"],b:"Big carbs, easy protein from beans and cheese. Add tuna or chicken to push protein higher."},
-    {n:"Rice + chicken/salmon + veg (batch)",tags:["carb","pack","prot"],b:"Cook a big batch on Sunday, box it up for the week. Reliable protein and carbs."},
-    {n:"Picky lunchbox",tags:["pack","prot"],b:"Same as a picky plate, boxed for work: eggs, cheese, crackers, cold meat, veg sticks, apple. The grazing lunch a teacher can actually eat."}
+    {n:"Chicken pasta pot",tags:["carb","pack","prot"],b:"<span class='rlbl'>Batch on Sunday.</span> Cook 60&ndash;80g pasta per portion, toss with cooked chicken, sweetcorn, peppers and a spoon of pesto or light dressing. Box up. Eat cold or reheat. Reliable protein and carbs a teacher can pick at."},
+    {n:"Wrap + chicken or ham",tags:["quick","pack"],b:"<span class='rlbl'>2 min.</span> Tortilla, chicken or ham, cheese, salad, a little light mayo. Roll up tight. Travels and eats in a five-minute break."},
+    {n:"Jacket potato + cheese + chicken or tuna",tags:["carb","prot"],b:"<span class='rlbl'>Microwave-friendly.</span> Microwave a jacket potato 8&ndash;10 min, top with grated cheese and either chicken or tuna for protein. Big carbs, easy protein."},
+    {n:"Rice + chicken or salmon + veg",tags:["carb","pack","prot"],b:"<span class='rlbl'>Batch.</span> Cook a big pan of rice, portion with chicken or salmon and roasted or steamed veg. Boxes up for the week, reheats well."},
+    {n:"Picky lunchbox",tags:["pack","prot"],b:"<span class='rlbl'>The picky plate, boxed.</span> Boiled eggs, cheese, crackers, cold meat, veg sticks, a Pink Lady apple. The grazing lunch you can actually get through on a busy day."}
   ],
   dinner:[
-    {n:"Chicken/steak + potatoes + veg",tags:["prot","carb"],b:"Lean protein, potatoes or sweet potato, plenty of veg with a little olive oil for extra calories. Smaller plate if needed, plus a treat later."},
-    {n:"Salmon + rice + greens",tags:["prot","carb"],b:"Oily fish for protein and healthy fats, rice for carbs. Add a drizzle of soy and sesame."},
-    {n:"Spaghetti bolognese",tags:["carb","prot"],b:"Lean mince, tomato sauce, pasta. Easy to batch, easy to eat, good carbs and protein. Cheese on top."},
-    {n:"Stir-fry + chicken or tofu + noodles",tags:["carb","prot"],b:"Loads of veg, protein, noodles, a good sauce. Quick after the gym."},
-    {n:"Fajitas",tags:["carb","prot"],b:"Chicken or beef, peppers, wraps or rice. Colourful and easy to scale up on a hungry day."}
+    {n:"Chicken or steak + potatoes + veg",tags:["prot","carb"],b:"<span class='rlbl'>Simple.</span> Lean protein, potatoes or sweet potato, plenty of veg with a little olive oil for extra calories. Smaller plate if needed, plus a treat later."},
+    {n:"Salmon + rice + greens",tags:["prot","carb"],b:"<span class='rlbl'>~20 min.</span> Bake or pan a salmon fillet, serve with rice and greens, a drizzle of soy and sesame. Protein and healthy fats."},
+    {n:"Spaghetti bolognese",tags:["carb","prot"],b:"<span class='rlbl'>Batch it.</span> Brown 500g lean mince with onion and garlic, add a tin of tomatoes and stock, simmer 20&ndash;30 min. Serve on spaghetti with cheese. Freezes brilliantly."},
+    {n:"Stir-fry + chicken or tofu + noodles",tags:["carb","prot"],b:"<span class='rlbl'>~15 min.</span> Fry chicken or tofu, add a bag of stir-fry veg and noodles, a good sauce (soy, garlic, ginger). Quick after the gym."},
+    {n:"Fajitas",tags:["carb","prot"],b:"<span class='rlbl'>Sharing-friendly.</span> Chicken or beef strips with peppers and onions and fajita spice, in wraps or with rice, cheese on top. Easy to scale up on a hungry day."}
   ]
 };
 var TREATS=[
-  {n:"Cinnamon Pink Lady apple pancakes",tags:["prot"],b:"Base pancakes topped with a diced Pink Lady apple softened in a pan with cinnamon and a splash of water. The one fruit you love, made into a warm topping. ~30g+ protein."},
-  {n:"Chocolate protein pancakes",tags:["prot"],b:"Use chocolate protein and add a teaspoon of cocoa to the batter. Top with a little dark chocolate melted, or a spoon of chocolate protein spread."},
-  {n:"Peanut butter pancakes",tags:["prot"],b:"Base pancakes, warm peanut butter drizzled over (microwave 15s to loosen). Calorie-dense and filling, great on a heavy training day."},
-  {n:"Cookie dough pancakes",tags:["prot"],b:"Vanilla protein batter with a few dark chocolate chips stirred in. Tastes like a treat, works like a protein feed."}
+  {n:"Cinnamon Pink Lady apple pancakes",tags:["prot"],b:"<span class='rlbl'>Topping.</span> Base pancakes topped with a diced Pink Lady apple softened in a pan with a shake of cinnamon and a splash of water for 3&ndash;4 min. The one fruit you love, made warm. ~30g+ protein."},
+  {n:"Chocolate protein pancakes",tags:["prot"],b:"<span class='rlbl'>Batter tweak.</span> Use chocolate protein and add 1 tsp cocoa to the batter. Top with a little melted dark chocolate or a spoon of chocolate protein spread."},
+  {n:"Cookie dough pancakes",tags:["prot"],b:"<span class='rlbl'>Mix-in.</span> Vanilla protein batter with a few dark chocolate chips stirred in. Tastes like a treat, works like a protein feed."}
 ];
 var OTHER=[
-  {n:"Protein mug cake",tags:["prot"],b:"1 scoop protein, 1 tbsp cocoa, 1 tbsp oat flour, a little baking powder, splash of milk. Microwave ~60&ndash;90s. Warm chocolate cake with ~25g protein in two minutes."},
-  {n:"Protein hot chocolate",tags:["quick","prot"],b:"Warm milk with a scoop of chocolate protein whisked in. Cosy evening treat that adds protein and calories before bed."},
-  {n:"Protein balls",tags:["quick"],b:"Oats, protein powder, peanut butter, a little honey, rolled into balls and chilled. Keep a batch for a sweet grab-and-go with a protein hit."},
-  {n:"Rice pudding + honey",tags:["carb"],b:"Warm rice pudding with a swirl of honey and cinnamon. Comforting carbs; stir a scoop of vanilla protein through for more."},
-  {n:"Dark chocolate + a glass of milk",tags:["quick"],b:"A couple of squares of good dark chocolate with a glass of whole milk. Simple, satisfying, and the milk sneaks in protein and calories."}
+  {n:"Protein mug cake",tags:["prot"],b:"<span class='rlbl'>2 min.</span> Mix 1 scoop protein, 1 tbsp cocoa, 1 tbsp oat flour (blitzed oats), ½ tsp baking powder and a splash of milk into a mug. Microwave 60&ndash;90s until just set. Warm chocolate cake, ~25g protein."},
+  {n:"Protein hot chocolate",tags:["quick","prot"],b:"<span class='rlbl'>Evening.</span> Warm 250ml milk, whisk in a scoop of chocolate protein. Cosy, and sneaks protein and calories in before bed."},
+  {n:"Protein balls (no peanut butter)",tags:["quick"],b:"<span class='rlbl'>Makes ~10.</span> Mix 80g oats, 1 scoop protein, 1 tbsp honey, 1 tbsp cocoa and a splash of milk to bind, plus a few dark chocolate chips. Roll into balls, chill 30 min. Grab-and-go sweet with a protein hit."},
+  {n:"Rice pudding + honey",tags:["carb"],b:"<span class='rlbl'>Comfort carbs.</span> Warm rice pudding with a swirl of honey and cinnamon. Stir a scoop of vanilla protein through while warm for more."},
+  {n:"Dark chocolate + a glass of milk",tags:["quick"],b:"<span class='rlbl'>Simple.</span> A couple of squares of good dark chocolate with a glass of whole milk. Satisfying, and the milk adds protein and calories."}
 ];
-var TAG={quick:['Quick','p-quick'],prot:['Protein','p-prot'],carb:['Carbs','p-carb'],pack:['Packable','p-pack']};
+var TAG={quick:['Quick','p-quick'],prot:['Protein','p-prot'],carb:['Carbs','p-carb'],pack:['Packable','p-pack'],school:['Heat at school','p-school']};
 function render(id,list){
   var host=document.getElementById(id); if(!host) return;
   list.forEach(function(m){
     var pills=(m.tags||[]).map(function(t){return '<span class="pill '+TAG[t][1]+'">'+TAG[t][0]+'</span>'}).join('');
     var el=document.createElement('div'); el.className='card meal';
-    el.innerHTML='<div class="mhead"><h3>'+m.n+'</h3><span class="caret">&#9656;</span></div>'+(pills?'<div style="margin-top:2px">'+pills+'</div>':'')+'<div class="mbody"><span class="lbl">How to make it</span><br>'+m.b+'</div>';
+    el.innerHTML='<div class="mhead"><h3>'+m.n+'</h3><span class="caret">&#9656;</span></div>'+(pills?'<div style="margin-top:2px">'+pills+'</div>':'')+'<div class="mbody"><span class="lbl">Recipe</span><br>'+m.b+'</div>';
     el.addEventListener('click',function(){el.classList.toggle('open')});
     host.appendChild(el);
   });
@@ -423,13 +443,15 @@ render('t-other',OTHER);
 /* ---------- planner ---------- */
 var PDAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 var SESS=[
-  {id:'upper',label:'Gym: Upper',load:2,gym:true,focus:'Upper body, push and pull. Progress a lift.'},
-  {id:'lower',label:'Gym: Lower',load:2,gym:true,focus:'Legs and glutes. Big one for shape.'},
-  {id:'full',label:'Gym: Full body',load:2,gym:true,focus:'Full body, hit the main compound lifts.'},
-  {id:'runeasy',label:'Run: easy',load:1,run:true,focus:'Easy 30&ndash;40 min, Zone 2, conversational.'},
-  {id:'runfast',label:'Run: faster',load:2,run:true,focus:'Intervals or a parkrun 5k. Once a week.'}
+  {id:'legham',label:'Legs: hamstrings',load:2,gym:true,focus:'Hamstring-focused legs. RDLs, curls, split squats.'},
+  {id:'legglute',label:'Legs: glutes',load:2,gym:true,focus:'Glute-focused legs. Hip thrusts, kickbacks, lunges.'},
+  {id:'back',label:'Back &amp; biceps',load:2,gym:true,focus:'Pulldowns, rows, curls.'},
+  {id:'push',label:'Shoulders/chest/tri',load:2,gym:true,focus:'Presses, raises, tricep work.'},
+  {id:'pilates',label:'Pilates',load:1,pil:true,focus:'Pilates class. Core, mobility, active recovery. Evening.'},
+  {id:'runeasy',label:'Run: easy',load:1,run:true,focus:'Easy run, building from 3k. Conversational.'},
+  {id:'runfast',label:'Run: faster',load:2,run:true,focus:'A quicker run once 5k feels easy. Occasional.'}
 ];
-var PDEFAULT={Mon:['upper'],Tue:['lower'],Wed:['runeasy'],Thu:['upper'],Fri:['lower'],Sat:['runfast'],Sun:[]};
+var PDEFAULT={Mon:['legham'],Tue:['back'],Wed:['push'],Thu:['pilates'],Fri:['runeasy'],Sat:['legglute'],Sun:[]};
 var WEEK={};
 PDAYS.forEach(function(d){WEEK[d]=(PDEFAULT[d]||[]).slice()});
 (function(){
@@ -439,12 +461,12 @@ PDAYS.forEach(function(d){WEEK[d]=(PDEFAULT[d]||[]).slice()});
     var nm=document.createElement('div'); nm.className='pdname'; nm.textContent=d;
     var chips=document.createElement('div'); chips.className='pchips';
     SESS.forEach(function(s){
-      var c=document.createElement('button'); c.className='pchip'; c.type='button'; c.textContent=s.label;
-      if(WEEK[d].indexOf(s.id)>-1){ c.classList.add('on'); if(s.run) c.classList.add('run'); }
+      var c=document.createElement('button'); c.className='pchip'; c.type='button'; c.innerHTML=s.label;
+      if(WEEK[d].indexOf(s.id)>-1){ c.classList.add('on'); if(s.run) c.classList.add('run'); if(s.pil) c.classList.add('pil'); }
       c.addEventListener('click',function(){
         var arr=WEEK[d]; var i=arr.indexOf(s.id);
-        if(i>-1){arr.splice(i,1);c.classList.remove('on','run');}
-        else{arr.push(s.id);c.classList.add('on'); if(s.run) c.classList.add('run');}
+        if(i>-1){arr.splice(i,1);c.classList.remove('on','run','pil');}
+        else{arr.push(s.id);c.classList.add('on'); if(s.run) c.classList.add('run'); if(s.pil) c.classList.add('pil');}
       });
       chips.appendChild(c);
     });
@@ -452,8 +474,17 @@ PDAYS.forEach(function(d){WEEK[d]=(PDEFAULT[d]||[]).slice()});
   });
   document.getElementById('buildBtn').addEventListener('click',buildWeek);
   document.getElementById('clearBtn').addEventListener('click',function(){
-    PDAYS.forEach(function(d){WEEK[d]=[]});
-    grid.querySelectorAll('.pchip').forEach(function(c){c.classList.remove('on','run')});
+    PDAYS.forEach(function(d){WEEK[d]=(PDEFAULT[d]||[]).slice()});
+    grid.querySelectorAll('.pchip').forEach(function(c){
+      c.classList.remove('on','run','pil');
+    });
+    PDAYS.forEach(function(d,ri){
+      var row=grid.querySelectorAll('.pday')[ri];
+      row.querySelectorAll('.pchip').forEach(function(c,ci){
+        var s=SESS[ci];
+        if(WEEK[d].indexOf(s.id)>-1){ c.classList.add('on'); if(s.run) c.classList.add('run'); if(s.pil) c.classList.add('pil'); }
+      });
+    });
     buildWeek();
   });
   buildWeek();
@@ -463,8 +494,9 @@ function dayMeta(ids){
   var real=SESS.filter(function(s){return ids.indexOf(s.id)>-1});
   var gym=real.some(function(s){return s.gym});
   var run=real.some(function(s){return s.run});
+  var pil=real.some(function(s){return s.pil});
   var load=real.reduce(function(a,s){return a+s.load},0);
-  return {real:real,gym:gym,run:run,load:load,empty:real.length===0,training:real.length>0};
+  return {real:real,gym:gym,run:run,pil:pil,load:load,empty:real.length===0,training:real.length>0};
 }
 function buildWeek(){
   var out=document.getElementById('weekOut');
@@ -472,45 +504,45 @@ function buildWeek(){
   var metas=PDAYS.map(function(d){return dayMeta(WEEK[d])});
   var gymCount=metas.filter(function(m){return m.gym}).length;
   var runCount=metas.filter(function(m){return m.run}).length;
+  var pilCount=metas.filter(function(m){return m.pil}).length;
   var restCount=metas.filter(function(m){return m.empty}).length;
 
   var warns=[];
-  if(gymCount<4) warns.push('Only '+gymCount+' gym session'+(gymCount===1?'':'s')+' set. The goal is 4 for steady muscle building.');
-  if(restCount===0) warns.push('No rest day. Muscle builds on the days off, so keep at least one, ideally two.');
+  if(gymCount<4) warns.push('Only '+gymCount+' gym session'+(gymCount===1?'':'s')+' set. You were aiming for 4 (two legs, a pull, a push).');
+  if(restCount===0) warns.push('No rest day. Muscle builds on the days off, so keep at least one.');
   var run2=0, runMax=0;
   for(var i=0;i<7;i++){ if(metas[i].load>=2){run2++; if(run2>runMax)runMax=run2;} else run2=0; }
-  if(runMax>=5) warns.push(runMax+' hard days in a row. Slot an easy day or a rest in so the training actually pays off.');
+  if(runMax>=5) warns.push(runMax+' hard days in a row. Slot an easy day, Pilates or a rest in to recover.');
 
   function li(a){return a.map(function(x){return '<li>'+x+'</li>'}).join('')}
-  function typeOf(m){ if(m.empty) return {t:'Rest & build',c:'p-rest'}; if(m.gym) return {t:'Gym day',c:'p-gym'}; return {t:'Run day',c:'p-run'}; }
-  function carbOf(m){ if(m.empty) return 'Protein high, carbs steady'; if(m.load>=2) return 'Fuel to build'; return 'Medium carb'; }
-  function focusList(m){ return m.real.map(function(s){return s.focus}); }
+  function typeOf(m){ if(m.empty) return {t:'Rest & build',c:'p-rest'}; if(m.gym) return {t:'Gym day',c:'p-gym'}; if(m.pil) return {t:'Pilates',c:'p-pil'}; return {t:'Run day',c:'p-run'}; }
+  function carbOf(m){ if(m.empty) return 'Protein high, carbs steady'; if(m.gym) return 'Fuel to build'; if(m.pil) return 'Eat normally'; return 'Medium carb'; }
   function fuelNote(m){
-    if(m.empty) return 'A rest day is still an eating day. Keep protein high across your feeds and don\'t drop the food, this is when you grow. Carbs can come down slightly.';
-    var t='Eat enough today, this is a building day. Spread ~110&ndash;120g protein across your feeds and keep carbs up around the session.';
-    if(m.gym) t+=' Fuel ~60&ndash;90 min before, then protein + carbs within an hour after (a shake, or the pancakes).';
-    else t+=' Have some carbs before the run and a protein feed after.';
-    return t;
+    if(m.empty) return 'A rest day is still an eating day. Keep protein high across your feeds, don\'t drop the food, this is when you grow. Carbs can come down slightly.';
+    if(m.gym) return 'Gym before school: small carb snack first (apple, rice cakes + honey), protein shake straight after, then your reheatable breakfast at school. Keep ~110&ndash;120g protein across the day.';
+    if(m.pil) return 'Pilates is light, so just eat normally with protein at every feed. A relaxed dinner before the class.';
+    return 'Some carbs before the run, a protein feed after. Keep it conversational.';
   }
   function treatNote(m){
-    if(m.gym) return 'Good day to cash in a treat with a job: protein pancakes or a mug cake as your post-workout feed.';
+    if(m.gym) return 'Good day to use a treat with a job: protein pancakes or a mug cake post-workout.';
     if(m.empty) return 'If you want something sweet, make it one that carries protein (see Treats).';
-    return 'A protein hot chocolate or some pancakes work well after the run.';
+    return 'A protein hot chocolate or pancakes work well after Pilates or a run.';
   }
 
   var html='';
   var sumCls = warns.length? 'c-warn':'c-good';
-  html+='<div class="callout '+sumCls+'"><b>Your week.</b> '+gymCount+' gym, '+runCount+' run'+(runCount===1?'':'s')+', '+restCount+' rest day'+(restCount===1?'':'s')+'.';
+  html+='<div class="callout '+sumCls+'"><b>Your week.</b> '+gymCount+' gym, '+pilCount+' Pilates, '+runCount+' run'+(runCount===1?'':'s')+', '+restCount+' rest day'+(restCount===1?'':'s')+'.';
   if(warns.length){ html+='<ul class="clean" style="margin:6px 0 0">'+li(warns)+'</ul>'; } else { html+=' Nicely balanced for building.'; }
   html+='</div>';
 
   for(var k=0;k<7;k++){
     var m=metas[k], ty=typeOf(m);
     var isWeekend=(k>=5);
-    var names=m.real.length? m.real.map(function(s){return s.label.replace('Gym: ','').replace('Run: ','Run, ')}).join(' + ') : 'Rest';
+    var names=m.real.length? m.real.map(function(s){return s.label}).join(' + ') : 'Rest';
     html+='<div class="card"><div class="dhead"><span class="dday">'+PDAYS[k]+'</span><span class="dtag">'+names+'</span></div>';
     html+='<span class="out-tag '+ty.c+'">'+ty.t+'</span> <span class="pill p-carb" style="vertical-align:middle">'+carbOf(m)+'</span> <span class="pill p-prot" style="vertical-align:middle">Protein ~110&ndash;120g</span>';
-    if(!m.empty){ html+='<p class="muted" style="margin:8px 0 4px"><b>Session.</b></p><ul class="clean muted" style="margin:0">'+li(focusList(m))+'</ul>'; }
+    if(m.gym) html+=' <span class="pill p-school" style="vertical-align:middle">Before school</span>';
+    if(!m.empty){ html+='<p class="muted" style="margin:8px 0 4px"><b>Session.</b></p><ul class="clean muted" style="margin:0">'+li(m.real.map(function(s){return s.focus}))+'</ul>'; }
     html+='<p class="muted" style="margin:8px 0 6px"><b>Fuel.</b> '+fuelNote(m)+'</p>';
     html+='<p class="muted" style="margin:0"><b>Treat.</b> '+treatNote(m)+'</p>';
     if(drink && isWeekend){ html+='<p class="muted" style="margin:8px 0 0"><span class="pill p-rest">Night out</span> Eat a proper protein meal before, water between drinks, and get protein and food in tomorrow. Don\'t let it cost you a session.</p>'; }
